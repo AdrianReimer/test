@@ -1,10 +1,20 @@
 // setup init variables
+let model;
+const loadModel = async m => {
+  $("#loading-spinner").show();
+  model = await tf.loadLayersModel('model.json');
+  console.log(model);
+  $("#loading-spinner").hide();
+};
+
+loadModel();
+
 var DEFAULT_MFCC_VALUE = [0,0,0,0,0,0,0,0,0,0,0,0,0]
 var FEATURE_NAME_MFCC = 'mfcc'
 var FEATURE_NAME_RMS = 'rms'
 
 var THRESHOLD_RMS = 0.002 // threshold on rms value
-var MFCC_HISTORY_MAX_LENGTH = 60
+var MFCC_HISTORY_MAX_LENGTH = 87
 
 var BOX_WIDTH = 25
 var BOX_HEIGHT = 20
@@ -62,7 +72,8 @@ onMicDataCall(features, callback){
                 'source':src,
                 'bufferSize':512,
                 'featureExtractors':features,
-                'callback':callback
+                'callback':callback,
+				'numberOfMFCCCoefficients': 87
             })
             resolve(analyzer)
         }).catch((err)=>{
@@ -118,6 +129,8 @@ function draw () {
         mfcc_history.splice(0,1)
     
     plot(mfcc_history)
+	
+	//model.predict(mfcc_history).print()
 }
 
 
