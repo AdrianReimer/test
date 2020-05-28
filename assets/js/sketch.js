@@ -1,11 +1,13 @@
 // setup init variables
+
 let model;
 const loadModel = async m => {
   $("#loading-spinner").show();
-  model = await tf.loadLayersModel('model.json');
+  model = await tf.loadLayersModel("https://hkinsley.com/static/tfjsmodel/model.json");
   console.log(model);
   $("#loading-spinner").hide();
 };
+
 
 loadModel();
 
@@ -136,7 +138,7 @@ function draw () {
 
 let plot = (data) => {
     for(let i = 0; i < data.length; i++ ) {
-        for(let j = 0; j < data [i].length; j++ ) {
+        for(let j = 0; j < 87; j++ ) {
             let color_strength = data[i][j] * 100
 
             // setting color
