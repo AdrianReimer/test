@@ -3,7 +3,7 @@
 let model;
 const loadModel = async m => {
   $("#loading-spinner").show();
-  model = await tf.loadLayersModel("https://hkinsley.com/static/tfjsmodel/model.json");
+  model = await tf.loadLayersModel("model.json");
   console.log(model);
   $("#loading-spinner").hide();
 };
